@@ -1,0 +1,39 @@
+High availability of Namenode:
+Hadoop 1.x NameNode had a single point of Failure (SPOF) problem which meant that if NameNode fails, then that Hadoop Cluster will become 
+unusable i.e goes into downtime unless and until an Admin restarts the namenode. In Hadoop 2.x overcomes this SPOF shortcoming by providing
+support for multiple NameNodes. It introduces Hadoop 2.x High Availabilty feature that brings in an extra NameNode(Stand by Namenode) to the
+Hadoop Architecture which is configured for automatic failure. The Main purpose of High Availabilty is to render availbilty to big data
+application 24 x 7 by deploying 2 hadoop NameNodes –One in active configuration and the other is the Stand by Node.
+Main features –
+1.	No Data Loss on Failure,No Job Failure,No Downtime.
+2.	Self Recovery from a failure.
+
+Q.2. Explain what is check pointing and how it is useful
+
+Check pointing is an essential part of maintaining and persisting filesystem metadata in HDFS. It’s crucial for efficient namenode recovery and 
+restart, and is an important indicator of overall cluster health. However, checkpointing can also be a source of confusion for operators of
+Apache Hadoop clusters.
+Check pointing with secondary namenode:
+In a non-HA deployment, checkpointing is done on the Secondary NameNode rather than the standby NameNode. Since there isn’t a shared 
+edits directory or automatic tailing of the edit log, the SecondaryNameNode has to go through a few more steps first to refresh its
+view of the namespace before continuing down the same basic steps.
+
+Q.3. Explain what is HDFS federation
+
+HDFS Federation improves the existing HDFS architecture through a clear separation of namespace and storage, enabling generic block storage
+layer. It enables support for multiple namespaces in the cluster to improve scalability and isolation. Federation also opens 
+up the architecture, expanding the applicability of HDFS cluster to new implementations and use cases.
+HDFS has two main layers:
+Namespace manages directories, files and blocks. It supports file system operations such as creation, modification, deletion and listing 
+of files and directories. Block Storage has two parts:
+1)Block Management - it maintains the membership of datanodes in the cluster. It supports block-related operations such as creation, 
+ 	deletion, modification and getting location of the blocks. It also takes care of replica placement and replication.
+2)Physical Storage- it stores the blocks and provides read/write access to it.
+
+Q.4. What are the configuration files that are to be edited for sure while installing a hadoop cluster.
+
+The four files that need to be configured explicitly while setting up a single node hadoop cluster are:
+1. Core-site.xml
+2. HDFS-site.xml
+3. YARN-site.xml
+4. xml
